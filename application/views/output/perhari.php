@@ -52,16 +52,16 @@
                         <tbody>
                             <?php
                             $ttl=0; 
-                            foreach($perhari as $no=>$pecah):
-                                @ $ttl += $pecah->total;
+                            foreach($perhari as $no=>$d):
+                                @ $ttl += $d->total;
                                 ?>
                                 <tr>
                                     <td><?php echo $no+1 ?></td>
-                                    <td><?php echo $pecah->id_transaksi ?></td>
-                                    <td><?php echo $pecah->nama_pembeli ?></td>
-                                    <td><?php echo $pecah->qty ?></td>
-                                    <td><?php echo $pecah->tgl_transaksi ?></td>
-                                    <td>Rp. <?php echo number_format($pecah->total) ?></td>
+                                    <td><?php echo $d->id_transaksi ?></td>
+                                    <td><?php echo $d->nama_pembeli ?></td>
+                                    <td><?php echo $d->qty ?></td>
+                                    <td><?php echo $d->tgl_transaksi ?></td>
+                                    <td>Rp. <?php echo number_format($d->total) ?></td>
                                     
                                 </tr>
                             <?php endforeach ?>

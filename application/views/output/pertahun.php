@@ -1,13 +1,15 @@
-<?php
-include('koneksi.php');
-@ $tahun = $_POST['tahun'];
-?>
+
 <!DOCTYPE html>
 
 <head>
-    <title>Kafka Kids</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/foto_produk/logo.png">
-    <?php include('components/head.php'); ?>
+	<!-- META SECTION -->
+	<title><?php echo SITE_NAME ."-". ucfirst($this->uri->segment(2)) ."-". ucfirst($this->uri->segment(3)) ?> </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="<?php echo base_url() ?>/asset/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url() ?>/asset/css/theme-default.css" />
+	<!-- EOF CSS INCLUDE -->
 </head>
 
 <body>
@@ -16,10 +18,10 @@ include('koneksi.php');
         <br>
         <div class="row">
         <div class="col-sm-3">
-                    <img style="width:250px;"  height="170px" src="assets/foto_produk/logo.png">
+                    <img style="width:250px;"  height="170px" alt="No Image" src="assets/foto_produk/logo.png">
                 </div>
                 <div class="col-sm-9" style='margin-top:10px'>
-            <h1>KAFKA KIDS</h1>
+                <h1>ANGAH BENGKEL</h1>
                 <h5>JALAN LINTAS SUMATERA SUNGAI RUMBAI KABUPATEN DHARMASRAYA</h5>
                 <h5>WA : 081363967072b <b>/</b> 085383836108</h5>
               
@@ -28,7 +30,7 @@ include('koneksi.php');
         </div>
         <br>
         <h3 class="col-sm-12" align="center">Laporan Data Penjualan</h3>
-        <h3 class="col-sm-12" align="center">Tahun <?php echo $tahun  ?></h3>
+        <h3 class="col-sm-12" align="center">Tahun <?php echo $thn  ?></h3>
         <br>
         <br>
         <br>
@@ -41,18 +43,17 @@ include('koneksi.php');
                             <tr>
                                 <th width="30px">No</th>
                                 <th>Bulan</th>
-                                <th>Jumlah Transaksi</th>
+                                <th>Jumlah </th>
                                 <th>Total </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                           @ $tahun = $_POST['tahun'];
-                           $ambil = $koneksi->query("SELECT *,sum(pembelian_jml) as pj, sum(pembelian_total) as pt , MONTH(pembelian_tgl) as bln FROM tb_pembelian WHERE  YEAR(pembelian_tgl)='$tahun' Group BY MONTH(pembelian_tgl)");     
-                           while ($pecah = $ambil->fetch_array()) {
-                               
-
-                           $bl = $pecah['bln'];
+                        <?php
+           
+                           $total=0;
+                           foreach($pertahun as $no=>$d){
+                            
+                           $bl = $d['bln'];
                                if($bl == 1){
                                    $b = 'Januari' ;
                                }elseif($bl == 2){
@@ -80,13 +81,13 @@ include('koneksi.php');
                                }
 
 
-                           $total += $pecah['pt'];
+                                 $total += $d['pt'];
                                ?>
                                    <tr>
-                                     <td><?php echo $no++ ?></td>
+                                     <td><?php echo $no+1 ?></td>
                                      <td><?= $b ?></td>
-                                     <td><?= $pecah['pj'] ?></td>
-                                   <td>Rp. <?= number_format($pecah['pt'] )?></td>
+                                     <td><?= $d['pj'] ?></td>
+                                   <td>Rp. <?= number_format($d['pt'] )?></td>
                                    </tr>
                                    
                                    <?php }?>
