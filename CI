@@ -1,0 +1,6 @@
+!. Konfigurasi Codeigniter
+application/cnfig/
+Autoload ('Libraries,helper,model')
+Config   ('base Url')
+Database ('localhost','root','','db_text')
+Routers  ('Mengatur Route)
