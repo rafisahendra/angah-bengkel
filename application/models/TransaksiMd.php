@@ -70,13 +70,20 @@ class TransaksiMd extends CI_Model
 
     }
 
-    public function laporan_erbulan(){
-        // $this->db->select('(SELECT SUM(payments.amount) FROM payments WHERE payments.invoice_id=4) AS amount_paid', FALSE);
-        // $query = $this->db->get('mytable');
+    public function get_laporan_perbulan(){
+
+        $bulan = $this->input->post('bulan'); 
+        $this->db->select("*,sum(qty) as pj FROM transaksi WHERE tgl_transaksi LIKE '$bulan%' group BY id_transaksi");     
+
+        return  $this->db->get('')->result();
     }
 
-    public function laporan_pertahun(){
-    
+    public function get_laporan_pertahun(){
+        $tahun = $this->input->post('tahun'); 
+        $this->db->select("*,sum(qty) as pj, sum(total) as pt , MONTH(tgl_transaksi) as bln FROM transaksi WHERE  YEAR(tgl_transaksi)='$tahun' Group BY MONTH(tgl_transaksi)");     
+
+        return  $this->db->get('')->result_array();
+
     }
  
 }

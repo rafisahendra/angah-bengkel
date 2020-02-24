@@ -127,12 +127,18 @@ class HomeCtr extends CI_Controller {
 
 
 	public function perbulan(){
-		$this->load->view('output/perbulan');
+		$data['perbulan'] = $this->TransaksiMd->get_laporan_perbulan();
+		$data['bulan'] = $this->input->post('bulan');
+		$this->load->view('output/perbulan', $data);
+
 	}
 
 
 	public function pertahun(){
-		$this->load->view('output/pertahun');
+		$data['pertahun'] = $this->TransaksiMd->get_laporan_pertahun();
+		$data['thn'] = $this->input->post('tahun');
+
+		$this->load->view('output/pertahun', $data);
 	}
 
 
