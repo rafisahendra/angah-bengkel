@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2020 at 09:31 AM
+-- Generation Time: Feb 24, 2020 at 09:50 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -44,7 +44,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `nama_lengkap`, `nohp`, `alamat`, `password`, `email`, `level`) VALUES
 (1, 'Rafi sahendra', '08129029293', 'Padang', '25d55ad283aa400af464c76d713c07ad', 'admin@admin.com', '1'),
-(2, 'Risma Yulianti', '085363229539', 'Padang', '25d55ad283aa400af464c76d713c07ad', 'pemilik@pemilik.com', '2'),
+(2, 'Ini Nama Pemilik', '085363229539', 'Padang', '25d55ad283aa400af464c76d713c07ad', 'pemilik@pemilik.com', '2'),
 (4, 'Gema Fajar', '08129029293', 'Padang', '25d55ad283aa400af464c76d713c07ad', 'gemafajar@gmail.com', '1');
 
 -- --------------------------------------------------------

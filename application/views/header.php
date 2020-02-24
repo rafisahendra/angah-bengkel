@@ -37,7 +37,7 @@
 
 						<div class="profile-data">
 							<div class="profile-data-name"><?php echo $this->session->userdata('user')  ?></div>
-							<div class="profile-data-title">Selamat Datang /<?php if($this->session->userdata('level')==2){echo "Pimpinan";}else {echo "Admin"; }?></div>
+							<div class="profile-data-title">Selamat Datang /<?php if($this->session->userdata('level')==2){echo "Pemilik";}else {echo "Admin"; }?></div>
 						</div>
 
 					</div>
