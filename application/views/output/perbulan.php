@@ -1,7 +1,5 @@
 <?php
 
-
-@ $bulan = $_POST['bulan'];
 @ $bln = explode('-', $bulan);
 
 
@@ -35,9 +33,14 @@ if($bln[1] == 1){
 <!DOCTYPE html>
 
 <head>
-    <title>Kafka Kids</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/foto_produk/logo.png">
-    <!-- <?php include('components/head.php'); ?> -->
+	<!-- META SECTION -->
+	<title><?php echo SITE_NAME ."-". ucfirst($this->uri->segment(2)) ."-". ucfirst($this->uri->segment(3)) ?> </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="<?php echo base_url() ?>/asset/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url() ?>/asset/css/theme-default.css" />
+	<!-- EOF CSS INCLUDE -->
 </head>
 
 <body>
@@ -46,10 +49,10 @@ if($bln[1] == 1){
         <br>
         <div class="row">
         <div class="col-sm-3">
-                    <img style="width:250px;"  height="170px" src="assets/foto_produk/logo.png">
+                    <img style="width:250px;" alt="No Image" height="170px" src="assets/foto_produk/logo.png">
                 </div>
                 <div class="col-sm-9" style='margin-top:10px'>
-            <h1>KAFKA KIDS</h1>
+            <h1>Angah Bengkel</h1>
                 <h5>JALAN LINTAS SUMATERA SUNGAI RUMBAI KABUPATEN DHARMASRAYA</h5>
                 <h5>WA : 081363967072b <b>/</b> 085383836108</h5>
               
@@ -68,43 +71,35 @@ if($bln[1] == 1){
                 <div class="table-responsive">
                     <br>
                     <table class="table table-striped table-hover table-bordered">
-                        <thead>
+                    <thead>
                             <tr>
                                 <th width="10px">No</th>
-                                <th>Nama Member</th>
-                                <th>No Hp</th>
-                                <th>Tanggal Pembelian</th>
-                                <th>Tujuan Pengiriman</th>
-                                <th>Jumlah Pembelian</th>
+                                <th>No transaksi</th>
+                                <th>Nama Pembeli</th>
+                                <th>Qty</th>
+                                <th>Tanggal Transaksi</th>
                                 <th>Total Pembelian</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            @ $bulan = $_POST['bulan'];
-                            $ambil = $koneksi->query("SELECT
-                            *,sum(pembelian_produk_jumlah) as pj
-                            FROM
-                            tb_pembelian INNER JOIN
-                            tb_member ON tb_pembelian.member_id = tb_member.member_id INNER JOIN
-                            tb_ongkir ON tb_pembelian.ongkir_id = tb_ongkir.ongkir_id INNER JOIN
-                            tb_pembelian_produk ON tb_pembelian.pembelian_id = tb_pembelian_produk.pembelian_id  WHERE tb_pembelian.pembelian_tgl LIKE '$bulan%' group BY tb_pembelian_produk.pembelian_id ");
-                            while ($pecah = $ambil->fetch_object()) {
-                                @ $ttl += $pecah->pembelian_total;
+                            $ttl=0; 
+                            foreach($perbulan as $no=>$d):
+                                @ $ttl += $d->total;
                                 ?>
                                 <tr>
-                                    <td><?php echo $no++ ?></td>
-                                    <td><?php echo $pecah->member_nama ?></td>
-                                    <td><?php echo $pecah->member_nohp ?></td>
-                                    <td><?php echo tgl_indo($pecah->pembelian_tgl) ?></td>
-                                    <td><?php echo $pecah->pembelian_kota ?></td>
-                                     <td><?php echo number_format($pecah->pj) ?></td>
-                                    <td>Rp. <?php echo number_format($pecah->pembelian_total) ?></td>
+                                    <td><?php echo $no+1 ?></td>
+                                    <td><?php echo $d->id_transaksi ?></td>
+                                    <td><?php echo $d->nama_pembeli ?></td>
+                                    <td><?php echo $d->qty ?></td>
+                                    <td><?php echo $d->tgl_transaksi ?></td>
+                                    <td>Rp. <?php echo number_format($d->total) ?></td>
+                                    
                                 </tr>
-                            <?php } ?>
+                            <?php endforeach ?>
                         <tfoot>
                             <tr>
-                                <td colspan="6">Total</td>
+                                <td colspan="5">Total</td>
                                 <td>Rp. <?php echo number_format(@ $ttl) ?></td>
                             </tr>
                         </tfoot>
